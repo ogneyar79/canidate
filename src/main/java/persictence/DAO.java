@@ -43,8 +43,8 @@ public class DAO implements AutoCloseable {
         return makeTransaction(session -> session.get(Candidate.class, id));
     }
 
-    public List<Candidate> getByCandidate(Candidate candidate) {
-        return this.makeTransaction(session -> session.createQuery("from Candidate c where c.id=" + candidate.getId()).list());
+    public Candidate getByCandidate(Candidate candidate) {
+        return (Candidate) this.makeTransaction(session -> session.createQuery("from Candidate c where c.id=" + candidate.getId()).getSingleResult());
     }
 
     public Candidate getByName(String name) {
